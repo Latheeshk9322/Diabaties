@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #4CAF50;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        label {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        input {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 1em;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+            display: none;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .result.success {
+            color: #28a745;
+        }
+
+        .result.error {
+            color: #dc3545;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Diabetes Prediction</h1>
+    <form action="/predict" method="post">
+        <label for="pregnancies">Pregnancies:</label>
+        <input type="number" step="any" id="pregnancies" name="pregnancies" required><br>
+
+        <label for="glucose">Glucose:</label>
+        <input type="number" step="any" id="glucose" name="glucose" required><br>
+
+        <label for="blood_pressure">Blood Pressure:</label>
+        <input type="number" step="any" id="blood_pressure" name="blood_pressure" required><br>
+
+        <label for="skin_thickness">Skin Thickness:</label>
+        <input type="number" step="any" id="skin_thickness" name="skin_thickness" required><br>
+
+        <label for="insulin">Insulin:</label>
+        <input type="number" step="any" id="insulin" name="insulin" required><br>
+
+        <label for="bmi">BMI:</label>
+        <input type="number" step="any" id="bmi" name="bmi" required><br>
+
+        <label for="dpf">Diabetes Pedigree Function:</label>
+        <input type="number" step="any" id="dpf" name="dpf" required><br>
+
+        <label for="age">Age:</label>
+        <input type="number" step="any" id="age" name="age" required><br><br>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    <div id="result" class="result"></div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();  // Prevent the form from submitting normally
+
+            // Show loading animation
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Processing...';
+            resultDiv.style.display = 'block';
+
+            // Simulate the form submission and result (Replace this with the actual backend result)
+            setTimeout(function() {
+                // Simulating the result after some time
+                const prediction = Math.random() < 0.5 ? 'Diabetic' : 'Non-Diabetic';
+                resultDiv.innerHTML = `Prediction: <strong>${prediction}</strong>`;
+                resultDiv.classList.remove('error', 'success');
+                resultDiv.classList.add(prediction === 'Diabetic' ? 'success' : 'error');
+            }, 2000);  // Simulating 2 seconds delay for result
+        });
+    </script>
+</body>
+</html>
